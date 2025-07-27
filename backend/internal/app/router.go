@@ -30,6 +30,11 @@ func SetupRouter() *gin.Engine {
 			history.DELETE("/history_id/:id", handler.Registry.HistoryHandler.DeleteHistoryByHistoryId)
 			history.DELETE("/assistant_id/:id", handler.Registry.HistoryHandler.DeleteHistoryByAssistantId)
 		}
+
+		llm := api.Group("/llm")
+		{
+			llm.POST("/chat", handler.Registry.LLMHandler.ChatLLM)
+		}
 	}
 	return router
 }
